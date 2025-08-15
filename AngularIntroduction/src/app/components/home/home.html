@@ -1,0 +1,53 @@
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Selamat Datang di <span>Iron Asia</span></h1>
+    <p>Temukan produk terbaik dengan harga terbaik</p>
+    <a href="#" class="btn-gold">Belanja Sekarang</a>
+  </div>
+</section>
+
+<!-- Kategori Produk -->
+<section class="categories">
+  <h2>Kategori Produk</h2>
+  <div class="category-list">
+    <div class="category-card">
+      <img src="https://via.placeholder.com/300x200?text=Elektronik" alt="Elektronik">
+      <h3>Elektronik</h3>
+    </div>
+    <div class="category-card">
+      <img src="https://via.placeholder.com/300x200?text=Fashion" alt="Fashion">
+      <h3>Fashion</h3>
+    </div>
+    <div class="category-card">
+      <img src="https://via.placeholder.com/300x200?text=Olahraga" alt="Olahraga">
+      <h3>Olahraga</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Produk Populer -->
+<section class="popular-products">
+  <h2>Produk Populer</h2>
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let p of [1,2,3,4,5,6,7,8]">
+      <img src="https://via.placeholder.com/300x200?text=Produk+{{p}}" alt="Produk {{p}}">
+      <h4>Produk {{p}}</h4>
+      <p class="price">Rp {{p * 100000}}</p>
+      <button class="btn-gold-outline">Tambah ke Keranjang</button>
+    </div>
+  </div>
+</section>
+
+<!-- Promo Section -->
+<section class="promo">
+  <div class="promo-content">
+    <h2>Diskon Spesial Hingga 50%</h2>
+    <p>Hanya untuk minggu ini, jangan sampai ketinggalan!</p>
+    <a href="#" class="btn-dark">Belanja Sekarang</a>
+  </div>
+</section>
+
+
+ 

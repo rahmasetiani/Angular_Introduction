@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<body>
+    <header class="header">
+        <div class="container">
+            <!-- Header Main -->
+            <div class="header-main">
+                <!-- Logo -->
+                <a href="#" class="logo">
+                    <span class="iron">iRON</span>
+                    <span class="asia">ASIA</span>
+                </a>
+
+                <!-- Search -->
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Cari produk, merek, atau kategori...">
+                    <button class="search-btn">
+                        <svg viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Header Right -->
+                <div class="header-right">
+                    <!-- Auth Section -->
+                    <div class="auth-section" id="authSection">
+                        <a href="#" class="auth-btn" onclick="login()">Daftar</a>
+                        <a href="#" class="auth-btn" onclick="login()">Masuk</a>
+                    </div>
+
+                    <!-- User Profile (Hidden by default) -->
+                    <div class="user-profile" id="userProfile" onclick="logout()">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span class="user-name" id="userName">User</span>
+                    </div>
+
+                    <!-- Icons -->
+                    <div class="icons">
+                        <!-- Notification -->
+                        <div class="icon" onclick="showNotifications()">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                            <span class="badge">2</span>
+                        </div>
+
+                        <!-- Cart -->
+                        <div class="icon" onclick="showCart()">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L6 11H4m3 2v6a2 2 0 002 2h10a2 2 0 002-2v-6"/>
+                            </svg>
+                            <span class="badge">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="/home">HOME</a></li>
+                    <li class="nav-item"><a href="/about">ABOUT</a></li>
+                    <li class="nav-item"><a href="#">PRODUCT</a></li>
+                    <li class="nav-item"><a href="#">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        let isLoggedIn = false;
+
+        function login() {
+            const name = prompt("Masukkan nama Anda:");
+            if (name && name.trim()) {
+                isLoggedIn = true;
+                updateUI(name.trim());
+            }
+        }
+
+        function logout() {
+            if (confirm("Keluar dari akun?")) {
+                isLoggedIn = false;
+                updateUI();
+            }
+        }
+
+        function updateUI(name = '') {
+            const authSection = document.getElementById('authSection');
+            const userProfile = document.getElementById('userProfile');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+
+            if (isLoggedIn && name) {
+                authSection.style.display = 'none';
+                userProfile.classList.add('active');
+                userName.textContent = name;
+                userAvatar.textContent = name.charAt(0).toUpperCase();
+            } else {
+                authSection.style.display = 'flex';
+                userProfile.classList.remove('active');
+            }
+        }
+
+        function showNotifications() {
+            alert('Notifikasi: 2 pesan baru');
+        }
+
+        function showCart() {
+            alert('Keranjang: 3 item');
+        }
+
+        // Search
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const query = document.querySelector('.search-input').value;
+            if (query.trim()) {
+                alert('Mencari: ' + query);
+            }
+        });
+
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value;
+                if (query.trim()) {
+                    alert('Mencari: ' + query);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
