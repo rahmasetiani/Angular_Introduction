@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Home } from '../home/home';
-import { About } from '../about/about';
+
 
 @Component({
   selector: 'app-footer',

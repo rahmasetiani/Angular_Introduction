@@ -1,53 +1,161 @@
+<!-- Hero Banner Slider
+<br>
+<br>
+<br>
+<br>
+<br> -->
 
-<!-- Hero Section -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Selamat Datang di <span>Iron Asia</span></h1>
-    <p>Temukan produk terbaik dengan harga terbaik</p>
-    <a href="#" class="btn-gold">Belanja Sekarang</a>
-  </div>
-</section>
+<section class="banner-section">
+  <div class="banner-container">
+    <div class="banner-wrapper" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+      <div class="banner-slide" *ngFor="let banner of banners">
+        <div class="banner-image-wrapper">
+          <img [src]="banner.image">
+          <div class="banner-overlay"></div>
+        </div>
+  
+      </div>
+    </div>
 
-<!-- Kategori Produk -->
-<section class="categories">
-  <h2>Kategori Produk</h2>
-  <div class="category-list">
-    <div class="category-card">
-      <img src="https://via.placeholder.com/300x200?text=Elektronik" alt="Elektronik">
-      <h3>Elektronik</h3>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/300x200?text=Fashion" alt="Fashion">
-      <h3>Fashion</h3>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/300x200?text=Olahraga" alt="Olahraga">
-      <h3>Olahraga</h3>
-    </div>
-  </div>
-</section>
+    <!-- Navigation Arrows -->
+    <button class="banner-nav prev" (click)="prevSlide()" aria-label="Previous slide">
+      <i class="nav-arrow">‹</i>
+    </button>
+    <button class="banner-nav next" (click)="nextSlide()" aria-label="Next slide">
+      <i class="nav-arrow">›</i>
+    </button>
 
-<!-- Produk Populer -->
-<section class="popular-products">
-  <h2>Produk Populer</h2>
-  <div class="product-grid">
-    <div class="product-card" *ngFor="let p of [1,2,3,4,5,6,7,8]">
-      <img src="https://via.placeholder.com/300x200?text=Produk+{{p}}" alt="Produk {{p}}">
-      <h4>Produk {{p}}</h4>
-      <p class="price">Rp {{p * 100000}}</p>
-      <button class="btn-gold-outline">Tambah ke Keranjang</button>
+    <!-- Dots Navigation -->
+    <div class="banner-dots">
+      <button *ngFor="let banner of banners; let i = index" 
+              class="dot" 
+              [class.active]="i === currentSlide"
+              (click)="goToSlide(i)"
+              [attr.aria-label]="'Go to slide ' + (i + 1)">
+      </button>
     </div>
   </div>
 </section>
 
-<!-- Promo Section -->
-<section class="promo">
-  <div class="promo-content">
-    <h2>Diskon Spesial Hingga 50%</h2>
-    <p>Hanya untuk minggu ini, jangan sampai ketinggalan!</p>
-    <a href="#" class="btn-dark">Belanja Sekarang</a>
+<!-- Welcome Section -->
+<section class="welcome-section">
+  <div class="container">
+    <div class="welcome-content">
+      <h1 class="main-title">{{ title }}</h1>
+      <p class="main-description">{{ description }}</p>
+      <div class="cta-buttons">
+        <button class="primary-btn">Jelajahi Produk</button>
+        <button class="secondary-btn">Hubungi Kami</button>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of stats">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-number">{{ stat.number }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    </div>
+  </div>
+</section>
 
- 
+<!-- Categories Section -->
+<section class="categories-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Kategori Produk</h2>
+      <p class="section-subtitle">Temukan berbagai kategori produk berkualitas untuk kebutuhan konstruksi Anda</p>
+    </div>
+    
+    <div class="categories-grid">
+      <div class="category-card" *ngFor="let category of categories" (click)="viewCategory(category)">
+        <div class="category-image-wrapper">
+          <img [src]="category.image" [alt]="category.name" class="category-image">
+          <div class="category-overlay">
+            <div class="category-icon">{{ category.icon }}</div>
+          </div>
+        </div>
+        <div class="category-content">
+          <h3 class="category-name">{{ category.name }}</h3>
+          <ul class="category-subcategories">
+            <li *ngFor="let sub of category.subcategories">{{ sub }}</li>
+          </ul>
+          <button class="category-btn">Lihat Semua</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="products-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Produk Unggulan</h2>
+      <p class="section-subtitle">Koleksi produk terbaik dengan harga kompetitif dan kualitas terjamin</p>
+    </div>
+    
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let product of products">
+        <div class="product-image-wrapper">
+          <img [src]="product.image" [alt]="product.name" class="product-image">
+          <div class="product-badges">
+            <span class="discount-badge" *ngIf="product.discount">-{{ product.discount }}%</span>
+            <span class="stock-badge" [class.out-of-stock]="!product.inStock">
+              {{ product.inStock ? 'Tersedia' : 'Stok Habis' }}
+            </span>
+          </div>
+          <div class="product-overlay">
+            <button class="quick-view-btn">Quick View</button>
+          </div>
+        </div>
+        
+        <div class="product-content">
+          <h3 class="product-name">{{ product.name }}</h3>
+          
+          <div class="product-rating">
+            <div class="stars">
+              <span *ngFor="let star of generateStars(product.rating)" 
+                    class="star" 
+                    [class.filled]="star === '★'">{{ star }}</span>
+            </div>
+            <span class="rating-value">({{ product.rating }})</span>
+          </div>
+          
+          <div class="product-pricing">
+            <span class="current-price">Rp {{ formatPrice(product.price) }}</span>
+            <span class="original-price" *ngIf="product.originalPrice">
+              Rp {{ formatPrice(product.originalPrice) }}
+            </span>
+          </div>
+          
+          <button class="add-to-cart-btn" 
+                  [class.disabled]="!product.inStock"
+                  (click)="addToCart(product)">
+            <i class="cart-icon">🛒</i>
+            {{ product.inStock ? 'Tambah ke Keranjang' : 'Stok Habis' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-content">
+      <h2 class="newsletter-title">Dapatkan Update Terbaru</h2>
+      <p class="newsletter-description">Berlangganan newsletter kami untuk mendapatkan informasi produk terbaru, promo menarik, dan tips konstruksi.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Masukkan email Anda" class="newsletter-input">
+        <button class="newsletter-btn primary-btn">Berlangganan</button>
+      </div>
+    </div>
+  </div>
+</section>
